@@ -1,0 +1,14 @@
+{
+  "name": "plantify",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "backend",
+    "frontend",
+    "packages/*"
+  ],
+  "scripts": {
+    "check": "npm run check --workspaces --if-present",
+    "audit": "npm audit --audit-level=low"
+  }
+}

@@ -1,0 +1,7 @@
+material/
+node_modules/
+dist/
+.tanstack/
+*.log
+.DS_Store
+.idea/
