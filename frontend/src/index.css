@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+#root {
+  @apply flex min-h-screen items-start justify-center bg-green-50;
+}
+
+form {
+  @apply space-y-6 rounded-lg bg-white p-8 shadow-lg;
+}
+
+label {
+  @apply block text-sm font-semibold text-gray-700;
+}
+
+input {
+  @apply w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none;
+}
+
+select {
+  @apply w-full rounded-lg border border-gray-300 bg-white px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none;
+}
+
+button {
+  @apply cursor-pointer;
+}
+
+a {
+  @apply inline-block rounded-lg bg-green-600 px-4 py-2 font-semibold text-white shadow-md transition-colors duration-200 hover:bg-green-700 hover:shadow-lg;
+}
+
+button.primary {
+  @apply rounded-lg bg-green-600 px-4 py-2 font-semibold text-white shadow-md transition-colors duration-200 hover:bg-green-700 hover:shadow-lg disabled:cursor-default disabled:opacity-50 disabled:hover:bg-green-600 disabled:hover:shadow-none;
+}

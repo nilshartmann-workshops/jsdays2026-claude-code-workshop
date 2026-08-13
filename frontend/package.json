@@ -1,0 +1,48 @@
+{
+  "name": "plantify-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "check": "prettier --check . && eslint . && tsc -b --noEmit",
+    "check:fix": "prettier --write . && eslint --fix ."
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.1",
+    "@plantify/contracts": "*",
+    "@tailwindcss/vite": "^4.1.10",
+    "@tanstack/react-query": "^5.84.1",
+    "@tanstack/react-query-devtools": "^5.84.1",
+    "@tanstack/react-router": "^1.154.14",
+    "@tanstack/react-router-devtools": "^1.154.14",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-error-boundary": "^6.0.0",
+    "react-hook-form": "^7.62.0",
+    "tailwindcss": "^4.1.10",
+    "zod": "^4.0.17"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "@tanstack/router-plugin": "^1.154.14",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.0",
+    "eslint": "^10.0.0",
+    "eslint-plugin-import-x": "^4.17.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.0",
+    "eslint-plugin-simple-import-sort": "^14.0.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "globals": "^17.0.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.46.4",
+    "vite": "^8.0.0"
+  }
+}
