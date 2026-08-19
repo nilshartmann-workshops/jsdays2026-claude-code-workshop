@@ -11,3 +11,6 @@ Content-Type: application/json
   "plantType": "HERBS",
   "location": "Küche"
 }
+
+### Pflegeaufgaben
+GET http://localhost:3380/api/care-tasks

@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 
 import type { NewPlantRequest } from "@plantify/contracts";
 
+import { createInitialCareTasks } from "../care/index.ts";
 import { type PlantRecord, plantRepository } from "./plant-repository.ts";
 
 export function registerPlant(request: NewPlantRequest): PlantRecord {
@@ -11,7 +12,11 @@ export function registerPlant(request: NewPlantRequest): PlantRecord {
     );
   }
 
-  return plantRepository.save({ id: randomUUID(), ...request });
+  const plant = plantRepository.save({ id: randomUUID(), ...request });
+
+  createInitialCareTasks(plant);
+
+  return plant;
 }
 
 export function findOwnerIdForPlant(plantId: string): string | undefined {
