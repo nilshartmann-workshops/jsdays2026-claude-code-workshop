@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CareTasksCalendarRouteImport } from './routes/care-tasks-calendar'
 import { Route as PlantsAddRouteImport } from './routes/plants.add'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareTasksCalendarRoute = CareTasksCalendarRouteImport.update({
+  id: '/care-tasks-calendar',
+  path: '/care-tasks-calendar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlantsAddRoute = PlantsAddRouteImport.update({
@@ -25,27 +31,31 @@ const PlantsAddRoute = PlantsAddRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/care-tasks-calendar': typeof CareTasksCalendarRoute
   '/plants/add': typeof PlantsAddRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/care-tasks-calendar': typeof CareTasksCalendarRoute
   '/plants/add': typeof PlantsAddRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/care-tasks-calendar': typeof CareTasksCalendarRoute
   '/plants/add': typeof PlantsAddRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/plants/add'
+  fullPaths: '/' | '/care-tasks-calendar' | '/plants/add'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/plants/add'
-  id: '__root__' | '/' | '/plants/add'
+  to: '/' | '/care-tasks-calendar' | '/plants/add'
+  id: '__root__' | '/' | '/care-tasks-calendar' | '/plants/add'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CareTasksCalendarRoute: typeof CareTasksCalendarRoute
   PlantsAddRoute: typeof PlantsAddRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/care-tasks-calendar': {
+      id: '/care-tasks-calendar'
+      path: '/care-tasks-calendar'
+      fullPath: '/care-tasks-calendar'
+      preLoaderRoute: typeof CareTasksCalendarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/plants/add': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CareTasksCalendarRoute: CareTasksCalendarRoute,
   PlantsAddRoute: PlantsAddRoute,
 }
 export const routeTree = rootRouteImport

@@ -9,6 +9,9 @@ const RootLayout = () => (
       <Link to="/plants/add" className="[&.active]:font-bold">
         Pflanzenverwaltung
       </Link>{" "}
+      <Link to="/care-tasks-calendar" className="[&.active]:font-bold">
+        Aufgaben
+      </Link>{" "}
     </div>
     <div>
       <Outlet />
