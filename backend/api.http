@@ -14,3 +14,14 @@ Content-Type: application/json
 
 ### Pflegeaufgaben
 GET http://localhost:3380/api/care-tasks
+
+### Rechnungen für einen Monat erzeugen
+POST http://localhost:3380/api/invoices
+Content-Type: application/json
+
+{
+  "billingPeriod": "2026-08"
+}
+
+### Rechnungen
+GET http://localhost:3380/api/invoices

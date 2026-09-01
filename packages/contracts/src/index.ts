@@ -57,3 +57,34 @@ export const CareTask = z.object({
   active: z.boolean(),
 });
 export type CareTask = z.infer<typeof CareTask>;
+
+/** Monat im Format "2026-09" */
+export const BillingPeriod = z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/);
+export type BillingPeriod = z.infer<typeof BillingPeriod>;
+
+export const Invoice = z.object({
+  id: z.string(),
+  ownerId: z.string(),
+  ownerName: z.string(),
+  billingPeriod: BillingPeriod,
+  amount: z.number(),
+  createdAt: z.iso.datetime(),
+});
+export type Invoice = z.infer<typeof Invoice>;
+
+export const InvoiceItem = z.object({
+  id: z.string(),
+  description: z.string(),
+  amount: z.number(),
+});
+export type InvoiceItem = z.infer<typeof InvoiceItem>;
+
+export const InvoiceDetails = Invoice.extend({
+  items: z.array(InvoiceItem),
+});
+export type InvoiceDetails = z.infer<typeof InvoiceDetails>;
+
+export const GenerateInvoicesRequest = z.object({
+  billingPeriod: BillingPeriod,
+});
+export type GenerateInvoicesRequest = z.infer<typeof GenerateInvoicesRequest>;

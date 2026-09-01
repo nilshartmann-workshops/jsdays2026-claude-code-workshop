@@ -2,6 +2,10 @@ import { randomUUID } from "node:crypto";
 
 import type { CareTaskType, PlantType } from "@plantify/contracts";
 
+import {
+  trackCareTaskCompleted,
+  trackInitialCareTasksCreated,
+} from "../billing/index.ts";
 import { addDays, today } from "../shared/dates.ts";
 import { NotFoundError } from "../shared/http.ts";
 import { type CareTaskRecord, careTaskRepository } from "./care-task-repository.ts";
@@ -44,6 +48,8 @@ export function createInitialCareTasks(plant: {
 
   console.log(`Created ${careTasks.length} care tasks for plant '${plant.id}'`);
 
+  trackInitialCareTasksCreated(plant.id);
+
   return careTasks;
 }
 
@@ -69,7 +75,11 @@ export function completeCareTask(careTaskId: string): CareTaskRecord {
           nextDueDate: addDays(careTask.nextDueDate, careTask.interval),
         };
 
-  return careTaskRepository.save(completed);
+  careTaskRepository.save(completed);
+
+  trackCareTaskCompleted(completed.plantId, completed.type);
+
+  return completed;
 }
 
 export function getAllCareTasks(): CareTaskRecord[] {
