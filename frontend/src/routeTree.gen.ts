@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CareTasksCalendarRouteImport } from './routes/care-tasks-calendar'
+import { Route as InvoiceRouteRouteImport } from './routes/invoice/route'
+import { Route as InvoiceIndexRouteImport } from './routes/invoice/index'
+import { Route as InvoiceInvoiceIdRouteImport } from './routes/invoice/$invoiceId'
 import { Route as PlantsAddRouteImport } from './routes/plants.add'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +26,21 @@ const CareTasksCalendarRoute = CareTasksCalendarRouteImport.update({
   path: '/care-tasks-calendar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InvoiceRouteRoute = InvoiceRouteRouteImport.update({
+  id: '/invoice',
+  path: '/invoice',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvoiceIndexRoute = InvoiceIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => InvoiceRouteRoute,
+} as any)
+const InvoiceInvoiceIdRoute = InvoiceInvoiceIdRouteImport.update({
+  id: '/$invoiceId',
+  path: '/$invoiceId',
+  getParentRoute: () => InvoiceRouteRoute,
+} as any)
 const PlantsAddRoute = PlantsAddRouteImport.update({
   id: '/plants/add',
   path: '/plants/add',
@@ -31,30 +49,57 @@ const PlantsAddRoute = PlantsAddRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/invoice': typeof InvoiceRouteRouteWithChildren
   '/care-tasks-calendar': typeof CareTasksCalendarRoute
+  '/invoice/$invoiceId': typeof InvoiceInvoiceIdRoute
   '/plants/add': typeof PlantsAddRoute
+  '/invoice/': typeof InvoiceIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/care-tasks-calendar': typeof CareTasksCalendarRoute
+  '/invoice/$invoiceId': typeof InvoiceInvoiceIdRoute
   '/plants/add': typeof PlantsAddRoute
+  '/invoice': typeof InvoiceIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/invoice': typeof InvoiceRouteRouteWithChildren
   '/care-tasks-calendar': typeof CareTasksCalendarRoute
+  '/invoice/$invoiceId': typeof InvoiceInvoiceIdRoute
   '/plants/add': typeof PlantsAddRoute
+  '/invoice/': typeof InvoiceIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/care-tasks-calendar' | '/plants/add'
+  fullPaths:
+    | '/'
+    | '/invoice'
+    | '/care-tasks-calendar'
+    | '/invoice/$invoiceId'
+    | '/plants/add'
+    | '/invoice/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/care-tasks-calendar' | '/plants/add'
-  id: '__root__' | '/' | '/care-tasks-calendar' | '/plants/add'
+  to:
+    | '/'
+    | '/care-tasks-calendar'
+    | '/invoice/$invoiceId'
+    | '/plants/add'
+    | '/invoice'
+  id:
+    | '__root__'
+    | '/'
+    | '/invoice'
+    | '/care-tasks-calendar'
+    | '/invoice/$invoiceId'
+    | '/plants/add'
+    | '/invoice/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InvoiceRouteRoute: typeof InvoiceRouteRouteWithChildren
   CareTasksCalendarRoute: typeof CareTasksCalendarRoute
   PlantsAddRoute: typeof PlantsAddRoute
 }
@@ -75,6 +120,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CareTasksCalendarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/invoice': {
+      id: '/invoice'
+      path: '/invoice'
+      fullPath: '/invoice'
+      preLoaderRoute: typeof InvoiceRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invoice/': {
+      id: '/invoice/'
+      path: '/'
+      fullPath: '/invoice/'
+      preLoaderRoute: typeof InvoiceIndexRouteImport
+      parentRoute: typeof InvoiceRouteRoute
+    }
+    '/invoice/$invoiceId': {
+      id: '/invoice/$invoiceId'
+      path: '/$invoiceId'
+      fullPath: '/invoice/$invoiceId'
+      preLoaderRoute: typeof InvoiceInvoiceIdRouteImport
+      parentRoute: typeof InvoiceRouteRoute
+    }
     '/plants/add': {
       id: '/plants/add'
       path: '/plants/add'
@@ -85,8 +151,23 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface InvoiceRouteRouteChildren {
+  InvoiceInvoiceIdRoute: typeof InvoiceInvoiceIdRoute
+  InvoiceIndexRoute: typeof InvoiceIndexRoute
+}
+
+const InvoiceRouteRouteChildren: InvoiceRouteRouteChildren = {
+  InvoiceInvoiceIdRoute: InvoiceInvoiceIdRoute,
+  InvoiceIndexRoute: InvoiceIndexRoute,
+}
+
+const InvoiceRouteRouteWithChildren = InvoiceRouteRoute._addFileChildren(
+  InvoiceRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InvoiceRouteRoute: InvoiceRouteRouteWithChildren,
   CareTasksCalendarRoute: CareTasksCalendarRoute,
   PlantsAddRoute: PlantsAddRoute,
 }
