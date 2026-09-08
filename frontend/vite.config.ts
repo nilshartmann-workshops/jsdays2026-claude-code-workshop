@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import tailwindcss from "@tailwindcss/vite";
 import tanstackRouter from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
@@ -25,5 +26,8 @@ export default defineConfig({
     proxy: {
       "/api": BACKEND_URL,
     },
+  },
+  test: {
+    include: ["src/**/*.test.{ts,tsx}"],
   },
 });

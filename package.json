@@ -8,6 +8,7 @@
     "packages/*"
   ],
   "scripts": {
+    "test": "npm run test:run --workspaces --if-present",
     "check": "npm run check --workspaces --if-present",
     "audit": "npm audit --audit-level=low"
   }
